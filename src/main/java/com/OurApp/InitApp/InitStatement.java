@@ -1,4 +1,4 @@
-package com.OurApp.Db;
+package com.OurApp.InitApp;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-public class InitStatement {
+public class InitStatement implements IinitStatement{
     private static Statement statement = null;
 
     public Statement GetStatement(){

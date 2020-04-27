@@ -1,10 +1,10 @@
-package com.OurApp.Db;
+package com.OurApp.Controller.Sql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class SqlQuery  implements ISqlQuery{
+public class SqlQuery  implements ISqlQuery {
     private static SqlQuery instance;
 
     private Statement _statement = null;

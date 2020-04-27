@@ -1,4 +1,4 @@
-package com.OurApp.Db;
+package com.OurApp.Controller.Sql;
 
 
 import java.sql.ResultSet;
