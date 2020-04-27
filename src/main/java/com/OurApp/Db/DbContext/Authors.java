@@ -1,11 +1,25 @@
 package com.OurApp.Db.DbContext;
 
 public class Authors {
+    private Authors(){}
 
-    private int _id;
-    private String _f_name;
-    private String _l_name;
-    private String _lang;
+    public int get_id() {
+        return _id;
+    }
+
+    @Override
+    public String toString() {
+        return "Authors{" +
+                "_id=" + _id +
+                ", _f_name='" + _f_name + '\'' +
+                ", _l_name='" + _l_name + '\'' +
+                ", _lang='" + _lang + '\'' +
+                '}';
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
+    }
 
     public String get_f_name() {
         return _f_name;
@@ -31,38 +45,40 @@ public class Authors {
         this._lang = _lang;
     }
 
-    public int get_id() {
-        return _id;
+    private int _id;
+    private String _f_name;
+    private String _l_name;
+    private String _lang;
+
+    public static Builder newBuilder() {
+        return new Authors().new Builder();
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
-    }
+    public class Builder {
+        private Builder() {
+        }
 
+        public Builder sethId(int id) {
+            Authors.this._id = id;
+            return this;
+        }
+        public Builder setF_Name(String f_name) {
+            Authors.this._f_name = f_name;
+            return this;
+        }
+        public Builder setL_Name(String l_name) {
+            Authors.this._l_name = l_name;
+            return this;
+        }
+        public Builder setLang(String lang) {
+            Authors.this._lang = lang;
+            return this;
+        }
 
+        public Authors Build() {
+            return Authors.this;
+        }
 
-    public Authors(int id){
-        this._id = id;
-    }
-    public Authors(String f_name){
-        this._f_name = f_name;
-    }
-    public Authors(int id,String f_name ){
-        this._id = id;
-        this._f_name = f_name;
-    }
-    public Authors(int id,String f_name,String l_name){
-        this._id = id;
-        this._f_name = f_name;
-        this._l_name= l_name;
-    }
-    public Authors(int id,String f_name,String l_name,String lang ){
-        this._id = id;
-        this._f_name = f_name;
-        this._l_name= l_name;
-        this._lang = lang;
-    }
-    public Authors(){
     }
 
 }
