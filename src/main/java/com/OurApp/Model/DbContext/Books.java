@@ -74,7 +74,7 @@ public class Books {
     }
     public  class Builder{
         private Builder(){}
-        public Builder setid(int id){
+        public Builder setId(int id){
             Books.this._id.set(id);
             return this;
         }
@@ -82,7 +82,7 @@ public class Books {
             Books.this._title.set(title) ;
             return this;
         }
-        public Builder setAuthor_id(int author_id){
+        public Builder setAuthor_Id(int author_id){
             Books.this._author_id.set(author_id);
             return this;
         }

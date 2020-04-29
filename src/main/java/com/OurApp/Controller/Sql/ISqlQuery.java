@@ -6,6 +6,10 @@ import java.sql.Statement;
 
 public interface ISqlQuery {
     void setStatement(Statement statement);
+    ResultSet ExecuteAllSelectAuthors();
+    ResultSet ExecuteAllSelectReaders();
+    ResultSet ExecuteAllSelectRents();
+    ResultSet ExecuteAllSelectBooks();
     ResultSet ExecuteSelectAuthors();
     ResultSet ExecuteSelectReaders();
     ResultSet ExecuteSelectRents();

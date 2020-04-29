@@ -1,8 +1,6 @@
 package com.OurApp.Controller;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -88,7 +86,7 @@ public class LogInController {
             Stage stage = (Stage) node.getScene().getWindow();
             stage.close();
             Parent root;
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("View\\Test.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("View\\Db.fxml")));
             root.setOnMousePressed(event->{ xOffset = stage.getX() - event.getScreenX();
                 yOffset = stage.getY() - event.getScreenY();
             });
@@ -111,14 +109,19 @@ public class LogInController {
 
             if(!DbNameField.getText().trim().equals("") & !LoginField.getText().trim().equals("") & !PasswordField.getText().trim().equals("")){
 
-                connect_Statement.initConnect(DbNameField.getText().trim(), LoginField.getText().trim(),PasswordField.getText().trim());
-                ErrorLabel.setTextFill(Color.WHITE);
-                ErrorLabel.setText("Sucsess rederection...");
-                OpenDb(e);
+                if(connect_Statement.initConnect(DbNameField.getText().trim(), LoginField.getText().trim(),PasswordField.getText().trim())){
+                    ErrorLabel.setTextFill(Color.WHITE);
+                    ErrorLabel.setText("Sucsess rederection...");
+                    OpenDb(e);
+                }else{
+                    ErrorLabel.setTextFill(Color.TOMATO);
+                    ErrorLabel.setText("Error connection");
+                }
+
             }
             else{
                 ErrorLabel.setTextFill(Color.TOMATO);
-                ErrorLabel.setText("Error");
+                ErrorLabel.setText("Fill All FIELD");
             }
     }
 
@@ -128,8 +131,7 @@ public class LogInController {
         CloseLogIn.setOnMouseClicked(e-> closeApp());
         MainPane.setOnKeyPressed(keyEvent -> {
            if(keyEvent.getCode() == KeyCode.ENTER) ChecklogIn(keyEvent); });
-
-        LoginButton.setOnMouseClicked(e->ChecklogIn(e));
+        LoginButton.setOnMouseClicked(this::ChecklogIn);
 
     }
 }

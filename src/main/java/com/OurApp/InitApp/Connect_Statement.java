@@ -2,7 +2,6 @@ package com.OurApp.InitApp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 
@@ -30,7 +29,13 @@ public class Connect_Statement implements IConnect_Statement {
     @Override
     public Boolean initConnect( String db, String login, String password) {
         try{
-            db = defoultUrl+db;
+            db = defoultUrl+db+"?verifyServerCertificate=false"+
+                    "&allowPublicKeyRetrieval=true"+
+                    "&useSSL=false"+
+                    "&requireSSL=false"+
+                    "&useLegacyDatetimeCode=false"+
+                    "&amp"+
+                    "&serverTimezone=UTC";
             connection = DriverManager.getConnection(db, login, password);
             return true;
         } catch (Exception throwables) {
@@ -46,7 +51,7 @@ public class Connect_Statement implements IConnect_Statement {
         try {
             if(statement!= null) return statement;
             if (connection == null) throw new Exception("Connection is Null");
-            Statement statement = connection.createStatement();
+            statement = connection.createStatement();
             return statement;
         } catch (Exception throwables) {
             System.out.println("\n" + Arrays.toString(throwables.getStackTrace()));

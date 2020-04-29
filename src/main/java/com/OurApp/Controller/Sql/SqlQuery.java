@@ -27,6 +27,47 @@ public class SqlQuery  implements ISqlQuery {
     }
 
     @Override
+    public ResultSet ExecuteAllSelectAuthors() {
+        if(_statement ==null){
+            return null;
+        }
+        try{
+            return _statement.executeQuery("select * from authors");
+        }catch (SQLException throwable) {
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet ExecuteAllSelectReaders() {
+        if(_statement ==null){
+            return null;
+        }
+        try{
+            return _statement.executeQuery("select * from Readers");
+        }catch (SQLException throwable) {
+            return null;
+        }
+    }
+
+    @Override
+    public ResultSet ExecuteAllSelectRents() {
+        return null;
+    }
+
+    @Override
+    public ResultSet ExecuteAllSelectBooks() {
+        if(_statement ==null){
+            return null;
+        }
+        try{
+            return _statement.executeQuery("select * from Books");
+        }catch (SQLException throwable) {
+            return null;
+        }
+    }
+
+    @Override
     public ResultSet ExecuteSelectAuthors() {
         return null;
     }
@@ -57,16 +98,5 @@ public class SqlQuery  implements ISqlQuery {
         return null;
     }
 
-
-    public ResultSet SqlSelectFromAuthors()  {
-        if(_statement ==null){
-            return null;
-        }
-        try{
-            return _statement.executeQuery("select id from authors");
-        }catch (SQLException throwable) {
-            return null;
-        }
-    }
 
 }
