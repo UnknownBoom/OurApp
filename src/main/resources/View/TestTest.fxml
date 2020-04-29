@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="1022.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.OurApp.Controller.TestControll">
+   <children>
+      <HBox alignment="TOP_RIGHT" layoutX="-9.0" layoutY="14.0" prefHeight="26.0" prefWidth="891.0" spacing="10.0" styleClass="BodyPanelColor" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="TOP_LEFT" maxWidth="929.0" prefHeight="30.0" prefWidth="929.0" styleClass="HLabel" text="Ultimate DataBase Redactor" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets left="100.0" />
+               </padding>
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/datebase.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <ImageView fx:id="Roll" fitHeight="30.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/download.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="BClose" fitHeight="30.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/X.png" />
+               </image>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets right="5.0" />
+         </padding>
+      </HBox>
+      <TabPane layoutX="14.0" layoutY="30.0" prefHeight="736.0" prefWidth="962.0" styleClass="TabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+        <tabs>
+          <Tab text="Authors">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="572.0" prefWidth="939.0">
+                     <children>
+                        <TableView fx:id="ATable" layoutX="2.0" layoutY="2.0" prefHeight="571.0" prefWidth="965.0" AnchorPane.bottomAnchor="135.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn fx:id="AId" prefWidth="131.0" text="Id" />
+                            <TableColumn fx:id="AFN" prefWidth="282.0" text="F_Name" />
+                              <TableColumn fx:id="ALN" prefWidth="253.0" text="L_Name" />
+                              <TableColumn fx:id="AL" prefWidth="298.0" text="Lang" />
+                          </columns>
+                        </TableView>
+                        <VBox layoutX="886.0" prefHeight="674.0" prefWidth="51.0" spacing="20.0" AnchorPane.bottomAnchor="32.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Image/add.png" />
+                                 </image></ImageView>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Image/Change.png" />
+                                 </image></ImageView>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Image/Delete.png" />
+                                 </image></ImageView>
+                              <ImageView fx:id="AEx" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <VBox.margin>
+                                    <Insets top="430.0" />
+                                 </VBox.margin>
+                                 <image>
+                                    <Image url="@../Image/Execute.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                        <HBox layoutX="-9.0" layoutY="571.0" prefHeight="30.0" prefWidth="971.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="571.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="37.0" text="Id" textFill="WHITE">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="AIdFielText" prefHeight="30.0" prefWidth="85.0" />
+                              <Label prefHeight="30.0" prefWidth="84.0" text="F_Name" textFill="WHITE">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="AFNameFiledText" prefHeight="30.0" prefWidth="114.0" />
+                              <Label prefHeight="30.0" prefWidth="83.0" text="L_Name" textFill="WHITE">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="ALNameFieldText" prefHeight="30.0" prefWidth="131.0" />
+                              <Label prefHeight="30.0" prefWidth="76.0" text="Lang" textFill="WHITE">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="ALanfFieldText" prefHeight="30.0" prefWidth="131.0" />
+                           </children>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </HBox>
+                        <TextArea fx:id="ATA" layoutX="1.0" layoutY="606.0" prefHeight="59.0" prefWidth="962.0" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="59.0">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </TextArea>
+                        <Label fx:id="AErrorLabel" layoutX="3.0" layoutY="669.0" prefHeight="38.0" prefWidth="947.0" text="Error" textFill="#e40404" AnchorPane.bottomAnchor="-1.0" AnchorPane.topAnchor="669.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Readers">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab text="Books">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="Rents">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+   <styleClass>
+      <String fx:value="BodyPanel" />
+      <String fx:value="BodyPanelColor" />
+   </styleClass>
+</AnchorPane>

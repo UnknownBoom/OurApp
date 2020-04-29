@@ -3,6 +3,7 @@ package com.OurApp.Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -21,12 +22,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
 public class LogInController {
+    private double xOffset,yOffset;
 
 
     @FXML
@@ -69,7 +72,9 @@ public class LogInController {
         if(connect_Statement.getConnection()!=null){
             connect_Statement.getConnection().close();
         }
-    } catch (SQLException ignored) {
+    } catch (Exception throwables) {
+            System.out.println("\n" + Arrays.toString(throwables.getStackTrace()));
+            System.out.println(throwables.getMessage());
 
     }finally {
             javaFxLaunch.get_primaryStage().close();
@@ -78,26 +83,31 @@ public class LogInController {
 
     private void OpenDb(Event e){
         try {
+
             Node node = (Node) e.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
             stage.close();
             Parent root;
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("View\\LogIn.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("View\\Test.fxml")));
+            root.setOnMousePressed(event->{ xOffset = stage.getX() - event.getScreenX();
+                yOffset = stage.getY() - event.getScreenY();
+            });
+            root.setOnMouseDragged(event->{
+                stage.setX(event.getScreenX() + xOffset);
+                stage.setY(event.getScreenY() + yOffset);
+            });
+
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } catch (IOException ioException) {
-            ErrorLabel.setText("---Error Open Db Form---");
+        } catch (Exception throwables) {
+            System.out.println("\n" + Arrays.toString(throwables.getStackTrace()));
+            System.out.println(throwables.getMessage());
         }
 
     }
 
-    @FXML
-    void initialize() {
-
-        CloseLogIn.setOnMouseClicked(e-> closeApp());
-
-        LoginButton.setOnMouseClicked(e->{
+    private void ChecklogIn(Event e){
 
             if(!DbNameField.getText().trim().equals("") & !LoginField.getText().trim().equals("") & !PasswordField.getText().trim().equals("")){
 
@@ -110,9 +120,16 @@ public class LogInController {
                 ErrorLabel.setTextFill(Color.TOMATO);
                 ErrorLabel.setText("Error");
             }
-        });
-
     }
 
+    @FXML
+    void initialize() {
 
+        CloseLogIn.setOnMouseClicked(e-> closeApp());
+        MainPane.setOnKeyPressed(keyEvent -> {
+           if(keyEvent.getCode() == KeyCode.ENTER) ChecklogIn(keyEvent); });
+
+        LoginButton.setOnMouseClicked(e->ChecklogIn(e));
+
+    }
 }
