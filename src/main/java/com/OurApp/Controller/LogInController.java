@@ -1,14 +1,15 @@
 package com.OurApp.Controller;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 
-import com.OurApp.InitApp.Connect_Statement;
-import com.OurApp.InitApp.IConnect_Statement;
-import com.OurApp.InitApp.javaFxLaunch;
+import com.OurApp.Controller.Coonect_And_Statement.Connect_Statement;
+import com.OurApp.Controller.Coonect_And_Statement.IConnect_Statement;
+import com.OurApp.Controller.JavaFxInit.javaFxLaunch;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,12 +48,6 @@ public class LogInController {
 
     @FXML
     private PasswordField PasswordField;
-
-    @FXML
-    private ImageView UserIcon;
-
-    @FXML
-    private ImageView PasswordIcon;
 
     @FXML
     private Button LoginButton;
@@ -99,39 +94,40 @@ public class LogInController {
             stage.setScene(scene);
             stage.show();
         } catch (Exception throwables) {
-            System.out.println("\n" + Arrays.toString(throwables.getStackTrace()));
             System.out.println(throwables.getMessage());
+            System.out.println("LogInController OpenDb");
         }
 
     }
 
-    private void ChecklogIn(Event e){
+    private void chekLogin(Event e){
 
-            if(!DbNameField.getText().trim().equals("") & !LoginField.getText().trim().equals("") & !PasswordField.getText().trim().equals("")){
-
-                if(connect_Statement.initConnect(DbNameField.getText().trim(), LoginField.getText().trim(),PasswordField.getText().trim())){
-                    ErrorLabel.setTextFill(Color.WHITE);
-                    ErrorLabel.setText("Sucsess rederection...");
-                    OpenDb(e);
-                }else{
+            if(!DbNameField.getText().trim().equals("") & !LoginField.getText().trim().equals("")
+                    & !PasswordField.getText().trim().equals("")){
+                try{
+                    connect_Statement.initConnect(DbNameField.getText().trim(), LoginField.getText().trim(),PasswordField.getText().trim());
+                        ErrorLabel.setTextFill(Color.WHITE);
+                        ErrorLabel.setText("Sucsess, rederection...");
+                        OpenDb(e);
+                    } catch (SQLException throwables) {
                     ErrorLabel.setTextFill(Color.TOMATO);
-                    ErrorLabel.setText("Error connection");
+                    ErrorLabel.setText("Access denied");
+                    System.out.println(throwables.getMessage());
+                    System.out.println("LogInController Checklogin");
                 }
-
             }
             else{
                 ErrorLabel.setTextFill(Color.TOMATO);
-                ErrorLabel.setText("Fill All FIELD");
+                ErrorLabel.setText("Fill all field");
             }
     }
 
     @FXML
     void initialize() {
-
         CloseLogIn.setOnMouseClicked(e-> closeApp());
         MainPane.setOnKeyPressed(keyEvent -> {
-           if(keyEvent.getCode() == KeyCode.ENTER) ChecklogIn(keyEvent); });
-        LoginButton.setOnMouseClicked(this::ChecklogIn);
+           if(keyEvent.getCode() == KeyCode.ENTER) chekLogin(keyEvent); });
+        LoginButton.setOnMouseClicked(this::chekLogin);
 
     }
 }

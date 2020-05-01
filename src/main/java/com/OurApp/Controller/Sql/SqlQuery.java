@@ -1,102 +1,48 @@
 package com.OurApp.Controller.Sql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.OurApp.Controller.Coonect_And_Statement.Connect_Statement;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SqlQuery  implements ISqlQuery {
-    private static SqlQuery instance;
+    private static ISqlQuery instance;
 
-    private Statement _statement = null;
+    private Statement _statement;
+
+    {
+        try {
+            _statement = Connect_Statement.getInstance().getStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("class SqlQuery _statement");
+        }
+    }
+
+    private Connection _connection = Connect_Statement.getInstance().getConnection();
 
     private SqlQuery(){}
 
-    public static SqlQuery getInstance(){
+    public static ISqlQuery getInstance(){
         if(instance == null){
             instance = new SqlQuery();
         }
         return instance;
     }
 
-
-    @Override
-    public void setStatement(Statement statement) {
-        this._statement = statement;
-        if(this._statement==null){
-            System.out.println("Error Statement!!!!");}
-    }
-
-    @Override
-    public ResultSet ExecuteAllSelectAuthors() {
-        if(_statement ==null){
-            return null;
+    public List<String> GetColumnNamesForQuery(ResultSetMetaData resultSetMetaData) throws SQLException {
+        int size = resultSetMetaData.getColumnCount();
+        List<String> columnNames = new ArrayList<>();
+        for(int i=1;i<=size;i++){
+            columnNames.add(resultSetMetaData.getColumnName(i));
         }
-        try{
-            return _statement.executeQuery("select * from authors");
-        }catch (SQLException throwable) {
-            return null;
-        }
+        return columnNames;
     }
 
     @Override
-    public ResultSet ExecuteAllSelectReaders() {
-        if(_statement ==null){
-            return null;
-        }
-        try{
-            return _statement.executeQuery("select * from Readers");
-        }catch (SQLException throwable) {
-            return null;
-        }
+    public Boolean ExecuteCommand(String sql) throws SQLException {
+            return  _statement.execute(sql);
     }
-
-    @Override
-    public ResultSet ExecuteAllSelectRents() {
-        return null;
-    }
-
-    @Override
-    public ResultSet ExecuteAllSelectBooks() {
-        if(_statement ==null){
-            return null;
-        }
-        try{
-            return _statement.executeQuery("select * from Books");
-        }catch (SQLException throwable) {
-            return null;
-        }
-    }
-
-    @Override
-    public ResultSet ExecuteSelectAuthors() {
-        return null;
-    }
-
-    @Override
-    public ResultSet ExecuteSelectReaders() {
-        return null;
-    }
-
-    @Override
-    public ResultSet ExecuteSelectRents() {
-        return null;
-    }
-
-    @Override
-    public ResultSet ExecuteSelectBooks() {
-        return null;
-    }
-
-
-    @Override
-    public int ExecuteUpdate() {
-        return 0;
-    }
-
-    @Override
-    public Boolean ExecuteCommand() {
-        return null;
-    }
-
 
 }

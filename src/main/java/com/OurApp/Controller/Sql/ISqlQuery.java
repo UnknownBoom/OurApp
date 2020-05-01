@@ -1,20 +1,11 @@
 package com.OurApp.Controller.Sql;
 
-
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.List;
 
 public interface ISqlQuery {
-    void setStatement(Statement statement);
-    ResultSet ExecuteAllSelectAuthors();
-    ResultSet ExecuteAllSelectReaders();
-    ResultSet ExecuteAllSelectRents();
-    ResultSet ExecuteAllSelectBooks();
-    ResultSet ExecuteSelectAuthors();
-    ResultSet ExecuteSelectReaders();
-    ResultSet ExecuteSelectRents();
-    ResultSet ExecuteSelectBooks();
-    int ExecuteUpdate();
-    Boolean ExecuteCommand();
+    List<String> GetColumnNamesForQuery(ResultSetMetaData resultSetMetaData) throws SQLException;
+    Boolean ExecuteCommand(String sql) throws SQLException;
 
 }

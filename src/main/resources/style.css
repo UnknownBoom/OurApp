@@ -21,13 +21,11 @@
 }
 
 .tab-pane {
-    -fx-tab-min-width:120px;
+    -fx-tab-min-width: 940px;
     -fx-tab-max-width:120px;
     -fx-tab-min-height:30px;
     -fx-tab-max-height:30px;
 }
-
-
 
 .tab .tab-label{
     -fx-font-family: Arial;
@@ -36,7 +34,7 @@
 }
 
 .tab:selected {
-    -fx-background-color:black ;
+    -fx-background-color:black;
 }
 
 .tab-pane *.tab-header-area *.tab-header-background {
@@ -44,11 +42,11 @@
 }
 
 .tab {
+
     -fx-font-family: Arial;
     -fx-font-size: 18;
     -fx-background-color:transparent ;
 }
-
 
 
 

@@ -16,31 +16,16 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="LoginField" layoutX="13.0" layoutY="122.0" prefHeight="47.0" prefWidth="302.0" promptText="Login" style="-fx-background-color: #E7E7E7; -fx-background-radius: 10;" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="5.0">
+      <TextField fx:id="DbNameField" layoutX="14.0" layoutY="69.0" prefHeight="47.0" prefWidth="302.0" promptText="DB Name" style="-fx-background-color: #E7E7E7; -fx-background-radius: 10;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="4.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="PasswordField" layoutX="13.0" layoutY="177.0" prefHeight="47.0" prefWidth="302.0" promptText="Password" style="-fx-background-color: #E7E7E7; -fx-background-radius: 10;" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="5.0">
+      <PasswordField fx:id="LoginField" layoutX="14.0" layoutY="122.0" prefHeight="47.0" prefWidth="302.0" promptText="Login" style="-fx-background-color: #E7E7E7; -fx-background-radius: 10;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="4.0">
          <font>
             <Font size="18.0" />
          </font>
       </PasswordField>
-      <ImageView fx:id="UserIcon" fitHeight="36.0" fitWidth="40.0" layoutX="273.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="/Image/User.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="PasswordIcon" fitHeight="36.0" fitWidth="36.0" layoutX="273.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="/Image/Password.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="LoginButton" layoutX="114.0" layoutY="263.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #E7E7E7; -fx-background-radius: 10;" text="LOGIN">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
       <Label fx:id="ErrorLabel" alignment="TOP_CENTER" layoutX="17.0" layoutY="230.0" prefHeight="26.0" prefWidth="295.0" textFill="WHITE">
          <font>
             <Font size="17.0" />
@@ -51,15 +36,30 @@
             <Image url="/Image/X.png" />
          </image>
       </ImageView>
-      <TextField fx:id="DbNameField" layoutX="13.0" layoutY="68.0" prefHeight="47.0" prefWidth="309.0" promptText="DB Name" style="-fx-background-color: #E7E7E7; -fx-background-radius: 10;" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="5.0">
+      <PasswordField fx:id="PasswordField" layoutX="9.0" layoutY="178.0" prefHeight="47.0" prefWidth="309.0" promptText="Password" style="-fx-background-color: #E7E7E7; -fx-background-radius: 10;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="4.0">
          <font>
             <Font size="18.0" />
          </font>
-      </TextField>
+      </PasswordField>
       <ImageView fx:id="IconDataBase" fitHeight="36.0" fitWidth="40.0" layoutX="273.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="/Image/datebase.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="UserIcon" fitHeight="36.0" fitWidth="40.0" layoutX="273.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="/Image/User.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="PasswordIcon" fitHeight="36.0" fitWidth="36.0" layoutX="272.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="/Image/Password.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="LoginButton" layoutX="110.0" layoutY="267.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #E7E7E7; -fx-background-radius: 10;" text="LOGIN">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
