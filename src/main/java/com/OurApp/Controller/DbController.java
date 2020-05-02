@@ -18,7 +18,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -91,7 +90,7 @@ public class DbController {
             Dynamic dynamic = new Dynamic();
             dynamics.add(dynamic);
             for(int i=1;i<=size;i++) {
-                dynamics.get(z).getSimpleStringProperty().add(new SimpleStringProperty(resultSet.getObject(i).toString()));
+                dynamics.get(z).getSimpleStringProperty().add(new SimpleStringProperty(resultSet.getObject(i)==null?"null":resultSet.getObject(i).toString()));
             }
             unity.addObservableListForDynamic(dynamics.get(z));
             z++;
