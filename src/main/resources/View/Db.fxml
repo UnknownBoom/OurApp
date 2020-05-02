@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -63,11 +64,11 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="572.0" prefWidth="939.0">
                      <children>
                         <TableView fx:id="DynamicTable" layoutX="2.0" layoutY="2.0" prefHeight="576.0" prefWidth="965.0" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <VBox layoutX="886.0" prefHeight="674.0" prefWidth="51.0" spacing="20.0" AnchorPane.bottomAnchor="32.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox layoutX="965.0" layoutY="576.0" prefHeight="64.0" prefWidth="51.0" spacing="20.0" AnchorPane.bottomAnchor="66.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="576.0">
                            <children>
-                              <ImageView fx:id="DynamicExecute" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="DynamicExecute" fitHeight="59.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <VBox.margin>
-                                    <Insets top="570.0" />
+                                    <Insets />
                                  </VBox.margin>
                                  <image>
                                     <Image url="/Image/Execute.png" />
@@ -80,13 +81,20 @@
                               <Insets left="3.0" />
                            </padding>
                         </TextArea>
-                        <Label fx:id="DynamicErrorLabel" layoutX="3.0" layoutY="669.0" prefHeight="38.0" prefWidth="947.0" text="" textFill="#e40404" AnchorPane.bottomAnchor="-1.0" AnchorPane.topAnchor="669.0">
+                        <Label fx:id="DynamicErrorLabel" layoutX="3.0" layoutY="669.0" prefHeight="38.0" prefWidth="947.0" textFill="#e40404" AnchorPane.bottomAnchor="-1.0" AnchorPane.topAnchor="669.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                            <padding>
                               <Insets left="3.0" />
                            </padding>
+                           <tooltip>
+                              <Tooltip fx:id="LabelToolTip">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
                         </Label>
                      </children>
                   </AnchorPane>

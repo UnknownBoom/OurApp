@@ -13,15 +13,15 @@ import com.OurApp.Model.DbContext.Dynamic;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class DbController {
     Unity unity = Unity.getInstance();
@@ -29,12 +29,18 @@ public class DbController {
     ISqlQuery sqlQuery = SqlQuery.getInstance();
     private int rows_returned;
 
+    private double xOffset,yOffset;
+    private static  Stage _primaryStage;
+
 
     @FXML
     private ResourceBundle resources;
 
     @FXML
     private URL location;
+
+    @FXML
+    private Tooltip LabelToolTip;
 
     @FXML
     private AnchorPane anchorPane;
@@ -118,16 +124,20 @@ public class DbController {
                CreateTableForQuery(columnNames);
                DynamicErrorLabel.setTextFill(Color.BLUE);
                DynamicErrorLabel.setText(rows_returned + " row(s) affected | " + connect_statement.getStatement().getQueryTimeout() + " sec");
+               LabelToolTip.setText(DynamicErrorLabel.getText().trim());
                }
            else{
                DynamicErrorLabel.setTextFill(Color.BLUE);
                DynamicErrorLabel.setText(connect_statement.getStatement().getUpdateCount() + " row(s) affected | " + connect_statement.getStatement().getQueryTimeout() + " sec");
+               LabelToolTip.setText(DynamicErrorLabel.getText().trim());
            }
        } catch (Exception throwables) {
+
            System.out.println(throwables.getMessage());
            System.out.println("DbController DynamicHandler");
            DynamicErrorLabel.setTextFill(Color.TOMATO);
            DynamicErrorLabel.setText(throwables.getMessage());
+           LabelToolTip.setText(DynamicErrorLabel.getText().trim());
        }
     }
     private void rollApp(MouseEvent e){
@@ -139,6 +149,35 @@ public class DbController {
 
     @FXML
     void initialize() {
+
+        LabelToolTip.setShowDelay(Duration.seconds(1));
+
+        Alert infoAlert = new Alert(Alert.AlertType.NONE);
+        DialogPane dialogPane = infoAlert.getDialogPane();
+        dialogPane.getStylesheets().add("style.css");
+        dialogPane.getStyleClass().add("alertMessage");
+        Stage stage = (Stage) infoAlert.getDialogPane().getScene().getWindow();
+        ButtonType closeAlert =  new ButtonType("Close");
+        infoAlert.setGraphic(new ImageView("Image\\info.png"));
+        infoAlert.getButtonTypes().add(closeAlert);
+        //Moving ALERT
+        dialogPane.setOnMousePressed(event->{ xOffset = stage.getX() - event.getScreenX();
+            yOffset = stage.getY() - event.getScreenY();
+        });
+        dialogPane.setOnMouseDragged(event->{
+            stage.setX(event.getScreenX() + xOffset);
+            stage.setY(event.getScreenY() + yOffset);
+        });
+        infoAlert.initStyle(StageStyle.UNDECORATED);
+
+
+        //info Alert
+        infoAlert.setHeaderText("App information"); // THIS IS TITLE
+        infoAlert.setContentText("PUT YOUT TEXT HERE"); // THIS IS BODY
+
+
+        notes.setOnMouseClicked(e->infoAlert.showAndWait());
+
         Roll.setOnMouseClicked(this:: rollApp);
         Binding();
         BClose.setOnMouseClicked(e-> closeApp());
