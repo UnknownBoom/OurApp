@@ -1,19 +1,19 @@
 package com.OurApp.Model.DbContext;
 
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Dynamic {
 
-    private List<SimpleStringProperty> simpleStringProperty = new ArrayList<>();
-    public List<SimpleStringProperty> getSimpleStringProperty() {
-        return simpleStringProperty;
+    private List<SimpleObjectProperty> simpleObjectProperties = new ArrayList<>();
+    public List<SimpleObjectProperty> getSimpleObjectProperties() {
+        return simpleObjectProperties;
     }
 
-    public void setSimpleStringProperty(List<SimpleStringProperty> simpleStringProperty) {
-        this.simpleStringProperty = simpleStringProperty;
+    public void simpleObjectProperties(List<SimpleObjectProperty> simpleObjectProperties) {
+        this.simpleObjectProperties = simpleObjectProperties;
     }
     public Dynamic(){ }
 }
