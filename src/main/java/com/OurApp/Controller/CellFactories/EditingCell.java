@@ -25,7 +25,7 @@ public class EditingCell extends TableCell<Dynamic, Object> {
             textField.setOnKeyReleased((KeyEvent t) -> {
                 if (t.getCode() == KeyCode.ENTER) {
                     commitEdit(textField.getText());
-                    EditingCell.this.getTableView().requestFocus();//why does it lose focus??
+                    EditingCell.this.getTableView().requestFocus();
                     EditingCell.this.getTableView().getSelectionModel().selectBelowCell();
                 } else if (t.getCode() == KeyCode.ESCAPE) {
                     cancelEdit();
@@ -42,6 +42,8 @@ public class EditingCell extends TableCell<Dynamic, Object> {
         setText(getItem().toString());
         setGraphic(null);
     }
+
+
 
     @Override
     public void updateItem(Object item, boolean empty) {
