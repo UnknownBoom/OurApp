@@ -32,7 +32,8 @@ public class DbController {
     IConnect_Statement connect_statement = Connect_Statement.getInstance();
     ISqlQuery sqlQuery = SqlQuery.getInstance();
     ResultSetMetaData lastResult;
-    Object oldValue;
+    String lastSqlQuery="";
+    Boolean isEditing = false;
     private int rows_returned;
 
 
@@ -172,6 +173,7 @@ public class DbController {
            Boolean aBoolean = sqlQuery.ExecuteCommand(sql);
            if(aBoolean==null) throw new Exception("Null Answer");
            if(aBoolean){
+               lastSqlQuery = sql;
                lastResult = connect_statement.getStatement().getResultSet().getMetaData();
                rows_returned=0;
                unity.setColumnNames(sqlQuery.GetColumnNamesForQuery(connect_statement.getStatement().getResultSet().getMetaData()));
@@ -180,17 +182,21 @@ public class DbController {
                DynamicErrorLabel.setTextFill(Color.BLUE);
                DynamicErrorLabel.setText(rows_returned + " row(s) affected | " + connect_statement.getStatement().getQueryTimeout() + " sec");
            }
-           else{
+           else if(!isEditing){
+               DynamicTable.getColumns().clear();
                DynamicErrorLabel.setTextFill(Color.BLUE);
                DynamicErrorLabel.setText(connect_statement.getStatement().getUpdateCount() + " row(s) affected | " + connect_statement.getStatement().getQueryTimeout() + " sec");
            }
            LabelToolTip.setText(DynamicErrorLabel.getText().trim());
        } catch (Exception throwable) {
-           System.out.println(throwable.getMessage());
-           System.out.println("DbController DynamicHandler");
-           DynamicErrorLabel.setTextFill(Color.TOMATO);
-           DynamicErrorLabel.setText(throwable.getMessage());
-           LabelToolTip.setText(DynamicErrorLabel.getText().trim());
+           if (!isEditing){
+               System.out.println(throwable.getMessage());
+               System.out.println("DbController DynamicHandler");
+               DynamicErrorLabel.setTextFill(Color.TOMATO);
+               DynamicErrorLabel.setText(throwable.getMessage());
+               LabelToolTip.setText(DynamicErrorLabel.getText().trim());
+           }
+
        }
     }
 
@@ -209,7 +215,7 @@ public class DbController {
             for(int i=0;i<unity.getColumnNames().size();i++){
                 sqlQuery.append(unity.getColumnNames().get(i));
                 Object o =rowValues.getSimpleObjectProperties().get(i).getValue();
-                sqlQuery.append(o==null?" is null ":o instanceof Boolean?" is "+o+" ":o instanceof Float?" > "+((float)o-0.1)+" And  "+unity.getColumnNames().get(i)+" < "+((float)o+0.1)
+                sqlQuery.append(o==null?" is null ":o instanceof Boolean?" is "+o+" ":o instanceof Float |o instanceof Double?" > "+(((Number) o).doubleValue()-0.1)+" And  "+unity.getColumnNames().get(i)+" < "+(((Number) o).doubleValue()+0.1)
                         :" = \""+o+"\"");
                 if(i!=unity.getColumnNames().size()-1){
                     sqlQuery.append(" AND ");
@@ -229,11 +235,19 @@ public class DbController {
        try {
            if(sql==null) throw new Exception("Null");
            sqlQuery.ExecuteCommand(sql.toString());
-           Dynamic dynamic= (Dynamic)unity.getObservableListForDynamic().get(row);
-           dynamic.getSimpleObjectProperties().get(column).setValue(newValue);
+           isEditing = true;
+           if(connect_statement.getStatement().getUpdateCount()!=0){
+               Dynamic dynamic= (Dynamic)unity.getObservableListForDynamic().get(row);
+               dynamic.getSimpleObjectProperties().get(column).setValue(newValue);
+               DynamicHandler(lastSqlQuery);
+           }
            DynamicErrorLabel.setTextFill(Color.BLUE);
            DynamicErrorLabel.setText(connect_statement.getStatement().getUpdateCount()+" row(s) updated");
+           isEditing = false;
+
+
        } catch (Exception throwable) {
+           isEditing = false;
            DynamicErrorLabel.setTextFill(Color.TOMATO);
            DynamicErrorLabel.setText("Error update");
            System.out.println("sqlEditedHandler");
