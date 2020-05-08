@@ -32,6 +32,7 @@ public class DbController {
     IConnect_Statement connect_statement = Connect_Statement.getInstance();
     ISqlQuery sqlQuery = SqlQuery.getInstance();
     ResultSetMetaData lastResult;
+    Object oldValue;
     private int rows_returned;
 
 
@@ -157,6 +158,8 @@ public class DbController {
                 else if (dynamic.getSimpleObjectProperties().get(i).getValue() instanceof Long) tableColumn.setEditable(true);
                 else if (dynamic.getSimpleObjectProperties().get(i).getValue() instanceof Short) tableColumn.setEditable(true);
                 else if (dynamic.getSimpleObjectProperties().get(i).getValue() instanceof java.math.BigDecimal) tableColumn.setEditable(true);
+                else if (dynamic.getSimpleObjectProperties().get(i).getValue() instanceof Boolean) tableColumn.setEditable(true);
+
                 DynamicTable.getColumns().add(tableColumn);
             }
 
@@ -192,13 +195,12 @@ public class DbController {
     }
 
     private StringBuilder CreateQueryForEdited(int column, Dynamic rowValues, Object newValue)  {
-        if(!(newValue instanceof Boolean | newValue == null)) newValue = "\""+ newValue+"\"";
-
-
-
+        System.out.println(newValue.getClass()+" under "+newValue.toString().toLowerCase());
+        if(!(newValue == null)) newValue = "\""+ newValue.toString().trim()+"\"";
+        if (newValue.toString().toLowerCase().equals("\"true\"")) newValue=true;
+        if (newValue.toString().toLowerCase().equals("\"false\"")) newValue=false;
         try {StringBuilder sqlQuery = new StringBuilder("UPDATE ");
             sqlQuery.append(lastResult.getTableName(column+1));
-            System.out.println("okokok");
             sqlQuery.append(" SET ");
             sqlQuery.append(unity.getColumnNames().get(column));
             sqlQuery.append(" = ");
@@ -207,11 +209,8 @@ public class DbController {
             for(int i=0;i<unity.getColumnNames().size();i++){
                 sqlQuery.append(unity.getColumnNames().get(i));
                 Object o =rowValues.getSimpleObjectProperties().get(i).getValue();
-
-
                 sqlQuery.append(o==null?" is null ":o instanceof Boolean?" is "+o+" ":o instanceof Float?" > "+((float)o-0.1)+" And  "+unity.getColumnNames().get(i)+" < "+((float)o+0.1)
                         :" = \""+o+"\"");
-
                 if(i!=unity.getColumnNames().size()-1){
                     sqlQuery.append(" AND ");
                 }
