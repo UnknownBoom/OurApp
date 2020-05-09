@@ -3,6 +3,8 @@ package com.OurApp.Controller;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.OurApp.Controller.CellFactories.EditingCell;
@@ -26,6 +28,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import org.w3c.dom.ls.LSOutput;
 
 public class DbController {
     Unity unity = Unity.getInstance();
@@ -121,7 +124,39 @@ public class DbController {
             Dynamic dynamic = new Dynamic();
             dynamicList.add(dynamic);
             for(int i=1;i<=size;i++) {
-                dynamicList.get(z).getSimpleObjectProperties().add(new SimpleObjectProperty<>(resultSet.getObject(i)));
+                System.out.println(resultSet.getMetaData().getColumnTypeName(i));
+                switch (resultSet.getMetaData().getColumnTypeName(i)){
+                    case "YEAR":{
+                        SimpleObjectProperty property = new SimpleObjectProperty();
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+                        property.setValue(dateFormat.format(resultSet.getObject(i)));
+                        dynamicList.get(z).getSimpleObjectProperties().add(property);
+                        break;
+
+                    }
+                    case "DATE":{
+                        SimpleObjectProperty property = new SimpleObjectProperty();
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        property.setValue(dateFormat.format(resultSet.getObject(i)));
+                        dynamicList.get(z).getSimpleObjectProperties().add(property);
+                        break;
+                    }
+                    case"DATETIME":{
+                        SimpleObjectProperty property = new SimpleObjectProperty();
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        property.setValue(dateFormat.format(resultSet.getObject(i)));
+                        dynamicList.get(z).getSimpleObjectProperties().add(property);
+                        break;
+                    }
+                    case"TIME":{
+                        SimpleObjectProperty property = new SimpleObjectProperty();
+                        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                        property.setValue(dateFormat.format(resultSet.getObject(i)));
+                        dynamicList.get(z).getSimpleObjectProperties().add(property);
+                        break;
+                    }
+                    default:dynamicList.get(z).getSimpleObjectProperties().add(new SimpleObjectProperty<>(resultSet.getObject(i)));
+                }
             }
             unity.addObservableListForDynamic(dynamicList.get(z));
             z++;
@@ -160,6 +195,7 @@ public class DbController {
                 else if (dynamic.getSimpleObjectProperties().get(i).getValue() instanceof Short) tableColumn.setEditable(true);
                 else if (dynamic.getSimpleObjectProperties().get(i).getValue() instanceof java.math.BigDecimal) tableColumn.setEditable(true);
                 else if (dynamic.getSimpleObjectProperties().get(i).getValue() instanceof Boolean) tableColumn.setEditable(true);
+                else if (dynamic.getSimpleObjectProperties().get(i).getValue() instanceof Date) tableColumn.setEditable(true);
 
                 DynamicTable.getColumns().add(tableColumn);
             }
@@ -181,11 +217,12 @@ public class DbController {
                CreateColumnForQuery(unity.getColumnNames());
                DynamicErrorLabel.setTextFill(Color.BLUE);
                DynamicErrorLabel.setText(rows_returned + " row(s) affected | " + connect_statement.getStatement().getQueryTimeout() + " sec");
+
            }
            else if(!isEditing){
                DynamicTable.getColumns().clear();
                DynamicErrorLabel.setTextFill(Color.BLUE);
-               DynamicErrorLabel.setText(connect_statement.getStatement().getUpdateCount() + " row(s) affected | " + connect_statement.getStatement().getQueryTimeout() + " sec");
+               DynamicErrorLabel.setText(connect_statement.getStatement().getUpdateCount() + " row(s) updated | " + connect_statement.getStatement().getQueryTimeout() + " sec");
            }
            LabelToolTip.setText(DynamicErrorLabel.getText().trim());
        } catch (Exception throwable) {
@@ -195,6 +232,7 @@ public class DbController {
                DynamicErrorLabel.setTextFill(Color.TOMATO);
                DynamicErrorLabel.setText(throwable.getMessage());
                LabelToolTip.setText(DynamicErrorLabel.getText().trim());
+               throwable.printStackTrace();
            }
 
        }
