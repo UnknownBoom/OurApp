@@ -34,7 +34,7 @@ public class Connect_Statement implements IConnect_Statement {
                 "&requireSSL=false"+
                 "&useLegacyDatetimeCode=false"+
                 "&amp"+
-                "&serverTimezone=UTC";
+                "&serverTimezone=Europe/Moscow";
         connection = DriverManager.getConnection(db, login, password);
         return true;
     }
