@@ -242,10 +242,8 @@ public class DbController {
                DynamicHandler(lastSqlQuery);
            }
            DynamicErrorLabel.setTextFill(Color.BLUE);
-           DynamicErrorLabel.setText(connect_statement.getStatement().getUpdateCount()+" row(s) updated");
+           DynamicErrorLabel.setText(Math.abs(connect_statement.getStatement().getUpdateCount())+" row(s) updated");
            isEditing = false;
-
-
        } catch (Exception throwable) {
            isEditing = false;
            DynamicErrorLabel.setTextFill(Color.TOMATO);
