@@ -147,3 +147,35 @@
     -fx-text-fill:black;
     -fx-font-weight:bold;
 }
+.butImg{
+
+    -fx-opacity: 0.7;
+}
+.butImg:hover{
+    -fx-opacity: 1;
+}
+
+.textField{
+    -fx-background-color: #E7E7E7;
+    -fx-background-radius: 10;
+}
+
+.textField:hover{
+    -fx-background-color: white;
+}
+
+.textField:focused{
+    -fx-text-fill: green;
+    -fx-background-color:white;
+}
+
+.loginButton{
+    -fx-background-radius: 10px;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+
+}
+.loginButton:hover{
+    -fx-background-color: #088056;
+    -fx-text-fill: white;
+}
