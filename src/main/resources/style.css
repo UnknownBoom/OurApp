@@ -90,16 +90,10 @@
 }
 
 
-
-
-
 .text-area{
     -fx-background-color: #7B7E87;
     -fx-font-size: 18;
 }
-
-
-
 
 
 .selected-line {
@@ -110,7 +104,6 @@
     -fx-border-width:2.0px;
 }
 
-/**Costumization of The Bar where the buttons are located**/
 .alertMessage > .button-bar > .container {
     -fx-background-color:#787B84;
 }
@@ -122,7 +115,6 @@
     -fx-font-size:15.0px;
 }
 
-/**Costumization of DialogPane Header**/
 .alertMessage:header .header-panel {
     -fx-background-color: #787B84;
 }
@@ -147,6 +139,11 @@
     -fx-text-fill:black;
     -fx-font-weight:bold;
 }
+
+.HoverBlight:hover {
+    -fx-effect: dropshadow( three-pass-box, whitesmoke, 10.0, 0.0, 0.0, 0.0);
+}
+
 .butImg{
 
     -fx-opacity: 0.7;

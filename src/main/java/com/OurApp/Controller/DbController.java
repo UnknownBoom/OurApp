@@ -124,7 +124,7 @@ public class DbController {
             Dynamic dynamic = new Dynamic();
             dynamicList.add(dynamic);
             for(int i=1;i<=size;i++) {
-                System.out.println(resultSet.getMetaData().getColumnTypeName(i));
+
                 switch (resultSet.getMetaData().getColumnTypeName(i)){
                     case "YEAR":{
                         SimpleObjectProperty property = new SimpleObjectProperty();
@@ -232,14 +232,14 @@ public class DbController {
                DynamicErrorLabel.setTextFill(Color.TOMATO);
                DynamicErrorLabel.setText(throwable.getMessage());
                LabelToolTip.setText(DynamicErrorLabel.getText().trim());
-               throwable.printStackTrace();
+
            }
 
        }
     }
 
     private StringBuilder CreateQueryForEdited(int column, Dynamic rowValues, Object newValue)  {
-        System.out.println(newValue.getClass()+" under "+newValue.toString().toLowerCase());
+
         if(!(newValue == null)) newValue = "\""+ newValue.toString().trim()+"\"";
         if (newValue.toString().toLowerCase().equals("\"true\"")) newValue=true;
         if (newValue.toString().toLowerCase().equals("\"false\"")) newValue=false;
