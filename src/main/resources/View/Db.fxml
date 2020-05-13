@@ -15,13 +15,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="1022.0" stylesheets="/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.OurApp.Controller.DbController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="1022.0" stylesheets="@/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.OurApp.Controller.DbController">
    <children>
       <HBox alignment="TOP_RIGHT" layoutX="-9.0" layoutY="14.0" prefHeight="26.0" prefWidth="891.0" spacing="10.0" styleClass="BodyPanelColor" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="notes" fitHeight="30.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="HoverBlight">
                <image>
-                  <Image url="@/Image/notepad.png" />
+                  <Image url="@/Image/info.png" />
                </image>
             </ImageView>
             <Label alignment="TOP_LEFT" maxWidth="929.0" prefHeight="30.0" prefWidth="929.0" styleClass="HLabel" text="Ultimate DataBase Redactor" textAlignment="CENTER">
@@ -57,14 +57,14 @@
             <Insets right="5.0" />
          </padding>
       </HBox>
-      <TabPane layoutX="14.0" layoutY="30.0" prefHeight="736.0" prefWidth="962.0" styleClass="TabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-         <tabs>
-            <Tab fx:id="MainTab" text="Dynamic">
+      <TabPane layoutX="12.0" layoutY="28.0" prefHeight="752.0" prefWidth="1004.0" styleClass="TabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="28.0">
+        <tabs>
+            <Tab text="Dynamic">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="572.0" prefWidth="939.0">
                      <children>
-                        <TableView fx:id="DynamicTable" layoutX="2.0" layoutY="2.0" prefHeight="576.0" prefWidth="965.0" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <VBox layoutX="965.0" layoutY="576.0" prefHeight="64.0" prefWidth="51.0" spacing="20.0" AnchorPane.bottomAnchor="66.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="576.0">
+                        <TableView fx:id="DynamicTable" layoutX="3.0" prefHeight="576.0" prefWidth="965.0" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="0.0" />
+                        <VBox layoutX="954.0" layoutY="600.0" prefHeight="64.0" prefWidth="51.0" spacing="20.0" AnchorPane.bottomAnchor="42.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="600.0">
                            <children>
                               <ImageView fx:id="DynamicExecute" fitHeight="59.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="HoverBlight">
                                  <VBox.margin>
@@ -81,7 +81,7 @@
                               <Insets left="3.0" />
                            </padding>
                         </TextArea>
-                        <Label fx:id="DynamicErrorLabel" layoutX="3.0" layoutY="669.0" prefHeight="38.0" prefWidth="947.0" textFill="#e40404" AnchorPane.bottomAnchor="-1.0" AnchorPane.topAnchor="669.0">
+                        <Label fx:id="DynamicErrorLabel" layoutX="3.0" layoutY="669.0" prefHeight="38.0" prefWidth="947.0" textFill="#22f5a1" AnchorPane.bottomAnchor="-1.0" AnchorPane.topAnchor="669.0">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -100,7 +100,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-         </tabs>
+        </tabs>
       </TabPane>
    </children>
    <styleClass>
@@ -108,3 +108,4 @@
       <String fx:value="BodyPanelColor" />
    </styleClass>
 </AnchorPane>
+

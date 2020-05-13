@@ -320,7 +320,10 @@ public class DbController {
 
         //info Alert
         infoAlert.setHeaderText("App information"); // THIS IS TITLE
-        infoAlert.setContentText("PUT YOUT TEXT HERE"); // THIS IS BODY
+        infoAlert.setContentText("Ultimate DataBase Redactor 2020 ver 1.0.0 " +
+                "Для взаимодействия с базой данных необходимо ввести запрос в текстовом поле, расположенном в нижней части экрана. " +
+                "Чтобы выполнить запрос, нажмите на значок молнии рядом с полем запросов. " +
+                "При ошибке в запросе Вы увидите оповещение ниже поля запросов. "); // THIS IS BODY
 
 
         notes.setOnMouseClicked(e->infoAlert.showAndWait());
